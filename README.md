@@ -1,1 +1,1 @@
-# SDC
+# This is a personal project
