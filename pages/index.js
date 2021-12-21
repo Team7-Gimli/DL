@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import {Container} from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 import NaviBar from '../components/NaviBar.js';
 
@@ -10,11 +10,23 @@ const HomePage = () => {
     <div>
       <div className='homeTitle'>
         <Container>
-        <h2>How dead can you be</h2>
+          <Row>
+          <Col>
+          <h2>Dead Stare</h2>
+          </Col>
+          <Col>
+            <Button variant='dark' id='login'><Link href='/login'><a className='login'>Login</a></Link></Button>
+          </Col>
+          </Row>
         </Container>
       </div>
       <div className='naviBar'>
         <NaviBar />
+      </div>
+      <div>
+        <Container>
+          main page content
+        </Container>
       </div>
     </div>
   )

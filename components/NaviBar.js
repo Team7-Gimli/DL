@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Navbar, Nav, Container, Rows, Col, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const NaviBar = () => {
 
@@ -8,9 +8,9 @@ const NaviBar = () => {
     <Container>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">Navbar</Navbar.Brand>
+          <Navbar.Brand href="/">Home</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/">Legs</Nav.Link>
             <Nav.Link href="/">Toes</Nav.Link>
             <Nav.Link href="/">Faces</Nav.Link>
           </Nav>
