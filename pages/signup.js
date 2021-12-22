@@ -1,7 +1,10 @@
 import {useState} from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Link from 'next/link';
+import Router from 'next/router';
 import NaviBar from '../components/NaviBar.js';
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import {auth} from '../db/firebase/config.js';
 
 const Signup = () => {
 
@@ -21,11 +24,30 @@ const Signup = () => {
     })
   };
 
+
   const signUp = (e) => {
     e.preventDefault();
     // create object and post to firebase
     if(input.password !== input.reenter) {
       setErr('Passwords are not match!')
+    } else {
+      const email = input.email;
+      const password = input.password;
+      console.log('you clicked')
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+          console.log(user);
+          Router.push('/');
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage)
+        });
     }
   };
 

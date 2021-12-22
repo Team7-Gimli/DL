@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Link from 'next/link';
 import NaviBar from '../components/NaviBar.js';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const Login = (props) => {
 
@@ -21,6 +22,7 @@ const Login = (props) => {
     e.preventDefault();
 
     console.log(input);
+
 
   }
 

@@ -3,6 +3,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import Link from 'next/link';
 
 import NaviBar from '../components/NaviBar.js';
+import { auth } from '../db/firebase/config.js';
 
 
 const HomePage = () => {
@@ -11,12 +12,12 @@ const HomePage = () => {
       <div className='homeTitle'>
         <Container>
           <Row>
-          <Col>
-          <h2>Dead Stare</h2>
-          </Col>
-          <Col>
-            <Button variant='dark' id='login'><Link href='/login'><a className='login'>Login</a></Link></Button>
-          </Col>
+            <Col>
+              <h2>Dead Stare</h2>
+            </Col>
+            <Col>
+              <Button variant='dark' id='login'><Link href='/login'><a className='login'>Login</a></Link></Button>
+            </Col>
           </Row>
         </Container>
       </div>
