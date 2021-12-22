@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Navbar, Nav, Container, Rows, Col, Button } from 'react-bootstrap';
 
 
-const NaviBar = () => {
+const NaviBar = ({user, logout}) => {
 
   return (
     <Container>
@@ -13,6 +13,7 @@ const NaviBar = () => {
             <Nav.Link href="/">Legs</Nav.Link>
             <Nav.Link href="/">Toes</Nav.Link>
             <Nav.Link href="/">Faces</Nav.Link>
+            {user && <Button id='login' onClick={logout} variant='dark'>LogOut</Button>}
           </Nav>
         </Container>
       </Navbar>
