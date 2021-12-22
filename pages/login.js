@@ -5,6 +5,25 @@ import NaviBar from '../components/NaviBar.js';
 
 const Login = (props) => {
 
+  const [input, setInput] = useState({
+    email: '',
+    password: '',
+  });
+
+  const handleChange = ({target: {name, value}}) => {
+    setInput({
+      ...input,
+      [name]:value,
+    })
+  };
+
+  const login = (e) => {
+    e.preventDefault();
+
+    console.log(input);
+
+  }
+
   return (
     <div>
       <Container id='homeTitle'>
@@ -17,10 +36,10 @@ const Login = (props) => {
       <Container id='login-container'>
         <h4>Login to Dead Stare</h4>
         <br />
-        <Form>
+        <Form onSubmit={login}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control name='email' value={input.email} onChange={handleChange} type="email" placeholder="Enter email" />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>
@@ -28,7 +47,7 @@ const Login = (props) => {
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control name='password' value={input.password} onChange={handleChange} type="password" placeholder="Password" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Keep me logged in" />
