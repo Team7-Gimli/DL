@@ -1,5 +1,6 @@
-import {createContext} from 'react';
+// import { createContext } from 'react';
+// import { auth } from '../../db/firebase/config.js';
 
-const authContext = createContext();
+// const authContext = createContext();
 
-export default authContext;
+// export default authContext;
