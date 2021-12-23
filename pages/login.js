@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Link from 'next/link';
+import Router from 'next/router';
 import NaviBar from '../components/NaviBar.js';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../db/firebase/config.js';
+
 
 const Login = (props) => {
 
@@ -11,18 +14,27 @@ const Login = (props) => {
     password: '',
   });
 
-  const handleChange = ({target: {name, value}}) => {
+  const handleChange = ({ target: { name, value } }) => {
     setInput({
       ...input,
-      [name]:value,
+      [name]: value,
     })
   };
 
   const login = (e) => {
     e.preventDefault();
 
-    console.log(input);
+    const email = input.email;
+    const password = input.password;
 
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+      Router.push('/');
+
+    })
+    .catch(err => console.log(err.message));
 
   }
 
