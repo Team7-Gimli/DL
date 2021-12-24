@@ -5,6 +5,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 import NaviBar from '../components/NaviBar.js';
 import { auth } from '../db/firebase/config.js';
+import UploadForm from '../components/uploadForm.js';
 
 
 
@@ -28,7 +29,7 @@ const HomePage = () => {
               <h2>Dead Stare</h2>
             </Col>
             <Col>
-             {user ? <Link href='/'><a id='login'>{user.email}</a></Link> : <Button variant='dark' id='login'><Link href='/login'><a className='login'>Login</a></Link></Button>}
+             {user ? <Link href='/profile'><a id='login'>{user.email}</a></Link> : <Button variant='dark' id='login'><Link href='/login'><a className='login'>Login</a></Link></Button>}
             </Col>
           </Row>
         </Container>
@@ -38,7 +39,7 @@ const HomePage = () => {
       </div>
       <div>
         <Container>
-          main page content
+          {user && <UploadForm/>}
         </Container>
       </div>
     </div>
