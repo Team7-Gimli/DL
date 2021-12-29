@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { imageStorage } from '../db/firebase/config.js';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 
 const useStorage = (file) => {
@@ -13,23 +13,19 @@ const useStorage = (file) => {
     //references
     const imgRef = ref(imageStorage, file.name);
 
-    uploadBytes(imgRef, file)
-      .then( async snap => {
-        console.log('upload bolb');
-        let precentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-        setProgress(precentage);
-      })
-      .catch(error => setErr(error))
-
-    // imgRef.put(file).on('state_changed', (snap) => {
-    //   let precentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-    //   setProgress(precentage);
-    // }, (error) => {
-    //   setErr(error);
-    // }, async () => {
-    //   const url = await imgRef.getDownloadURL();
-    //   setUrl(url);
-    // })
+    const uploadTask = uploadBytesResumable(imgRef, file);
+    uploadTask.on('state_changed', (snap) => {
+      let precentage = (snap.bytesTransferred / snap.totalBytes) * 100;
+      setProgress(precentage);
+    }, (error) => {
+      setErr(error)
+    }, () => {
+      getDownloadURL(uploadTask.snapshot.ref)
+        .then(url => {
+          setUrl(url);
+        })
+        .catch(error => console.log(error));
+    });
   }
 
   useEffect(saveImg, [file]);
