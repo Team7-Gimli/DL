@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { Form, Container, Col, Row } from 'react-bootstrap';
+import { Form, Container, Col, Row, Modal } from 'react-bootstrap';
 import ProgressBar from './progressBar.js';
+import useStorage from '../hooks/useStorage.js';
+import ImgModal from './imgModal.js';
 
 const UploadForm = () => {
-
+  const [url, setURL] = useState(null);
   const [img, setImg] = useState(null);
+  const [show, setShow] = useState(false);
 
   const upload = (e) => {
     let image = e.target.files[0];
@@ -21,7 +24,8 @@ const UploadForm = () => {
       <Form.Group>
         <Form.Control onChange={upload} type='file' accept="image/*" />
       </Form.Group>
-      {img && <ProgressBar file={img} setFile={setImg} />}
+      {img && <ProgressBar file={img} setFile={setImg} setURL={setURL} setShow={setShow}/>}
+      {url && <ImgModal url={url} show={show} fullscreen={true} onHide={() => setShow(false)} />}
     </Form>
   )
 }

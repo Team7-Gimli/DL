@@ -1,12 +1,22 @@
 import useStorage from '../hooks/useStorage.js';
+import { useState, useEffect } from 'react';
 
-const ProgressBar = ({file, setFile}) => {
+const ProgressBar = ({file, setFile, setURL, setShow}) => {
 
   const { url, progress } = useStorage(file);
-  console.log({url, progress});
+
+  useEffect(() => {
+    if(url) {
+      setFile(null);
+      setURL(url);
+      setShow(true);
+    }
+  }, [url]);
 
   return (
-    <div>progressBar is here</div>
+    <div>
+      <p>Putting on Pantyhose {Math.floor(progress)}%</p>
+    </div>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { imageStorage } from '../db/firebase/config.js';
+import { imageStorage, firestore } from '../db/firebase/config.js';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import writeImgURL from '../db/firebase/images.js';
 
 
 const useStorage = (file) => {
