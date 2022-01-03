@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import writeImgURL from '../db/firebase/images.js';
+import { writeImgURL, readImgURL } from '../db/firebase/images.js';
 
-const ImgMdoal = ({ show, url, onHide }) => {
+const ImgMdoal = ({ show, url, onHide, setImages }) => {
 
-  const saveAndExit =() => {
+  const saveAndExit = () => {
     writeImgURL(url);
     onHide();
+    readImgURL(setImages);
   };
 
   return (

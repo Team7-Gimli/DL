@@ -4,7 +4,7 @@ import ProgressBar from './progressBar.js';
 import useStorage from '../hooks/useStorage.js';
 import ImgModal from './imgModal.js';
 
-const UploadForm = () => {
+const UploadForm = ({ setImages }) => {
   const [url, setURL] = useState(null);
   const [img, setImg] = useState(null);
   const [show, setShow] = useState(false);
@@ -24,8 +24,8 @@ const UploadForm = () => {
       <Form.Group>
         <Form.Control onChange={upload} type='file' accept="image/*" />
       </Form.Group>
-      {img && <ProgressBar file={img} setFile={setImg} setURL={setURL} setShow={setShow}/>}
-      {url && <ImgModal url={url} show={show} fullscreen={true} onHide={() => setShow(false)} />}
+      {img && <ProgressBar file={img} setFile={setImg} setURL={setURL} setShow={setShow} />}
+      {url && <ImgModal setImages={setImages} url={url} show={show} fullscreen={true} onHide={() => setShow(false)} />}
     </Form>
   )
 }

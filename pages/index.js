@@ -1,17 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { readImgURL } from '../db/firebase/images.js';
 
 import NaviBar from '../components/NaviBar.js';
 import { auth } from '../db/firebase/config.js';
 import UploadForm from '../components/uploadForm.js';
+import ImageList from '../components/imageList.js';
 
 
 
 const HomePage = () => {
 
   const [user, setUser] = useState (null);
+  const [images, setImages] = useState([]);
+
   onAuthStateChanged (auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -19,6 +23,10 @@ const HomePage = () => {
   const logOut = async () => {
     await signOut(auth);
   }
+
+  useEffect(() => {
+    readImgURL(setImages);
+  }, []);
 
   return (
     <div>
@@ -39,7 +47,12 @@ const HomePage = () => {
       </div>
       <div>
         <Container>
-          {user && <UploadForm/>}
+          {user && <UploadForm setImages={setImages}/>}
+        </Container>
+      </div>
+      <div>
+        <Container>
+        <ImageList images={images} />
         </Container>
       </div>
     </div>
