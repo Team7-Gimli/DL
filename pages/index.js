@@ -8,7 +8,7 @@ import NaviBar from '../components/NaviBar.js';
 import { auth } from '../db/firebase/config.js';
 import UploadForm from '../components/uploadForm.js';
 import ImageList from '../components/imageList.js';
-
+import ImageAlbum from'../components/imageAlbum.js';
 
 
 const HomePage = () => {
@@ -52,7 +52,7 @@ const HomePage = () => {
       </div>
       <div>
         <Container>
-        <ImageList images={images} />
+        <ImageAlbum images={images} />
         </Container>
       </div>
     </div>
